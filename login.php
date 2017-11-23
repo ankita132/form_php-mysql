@@ -20,7 +20,7 @@
 
 		if(email_exists($email,$con))
 		{
-			$result = mysqli_query($con, "SELECT password FROM usersinfo WHERE email='$email'");
+			$result = mysqli_query($con, "SELECT password FROM usersinfo WHERE email=`$email`");
 			$retrievepassword = mysqli_fetch_assoc($result);
 
 			if(!password_verify($password, $retrievepassword['password']))
@@ -29,7 +29,7 @@
 			}
 			else
 			{
-				$res = mysqli_query($con, "SELECT * FROM usersinfo WHERE email='$email'");
+				$res = mysqli_query($con, "SELECT * FROM usersinfo WHERE email=`$email`");
 				$row = mysqli_fetch_array($res, MYSQLI_ASSOC);
 				//execution time exceeding problem
 				while(mysqli_num_rows($res) == 1){

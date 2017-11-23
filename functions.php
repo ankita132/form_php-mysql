@@ -2,7 +2,7 @@
 
 	function email_exists($email, $con)
 	{
-		$result = mysqli_query($con,"SELECT * FROM usersinfo WHERE email='$email'");
+		$result = mysqli_query($con,"SELECT * FROM usersinfo WHERE email=`$email`");
 		$row = mysqli_fetch_array($result);
 
 		if(mysqli_num_rows($result) == 1)
@@ -15,7 +15,6 @@
 		}
 
 	}
-
 
 	function logged_in()
 	{

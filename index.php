@@ -16,10 +16,10 @@
 		  $lastName = mysqli_real_escape_string($con, $_POST['lname']);
 	   	  $email = mysqli_real_escape_string($con, $_POST['email']);
 		  $userName = mysqli_real_escape_string($con, $_POST['username']);
-	          $password = $_POST['password'];
-	          $passwordConfirm = $_POST['passwordConfirm'];
+	      $password = $_POST['password'];
+	      $passwordConfirm = $_POST['passwordConfirm'];
 		  $conditions = isset($_POST['conditions']);
-		  $date = date("F, d Y");
+		  $date = date("Y-m-d");
 
 		if(strlen($firstName) < 3)
 		{
@@ -53,13 +53,13 @@
 
 		else if(!$conditions)
 		{
-			$error = "You must be agree with the terms and conditions";
+			$error = "You must agree with the terms and conditions";
 		}
 
 		else
 		{
 				$password = password_hash($password, PASSWORD_DEFAULT);
-				$insertQuery = "INSERT INTO usersinfo(firstName, lastName, userName, email, password, date) VALUES ('$firstName','$lastName','$userName','$email','$password','$date')";
+				$insertQuery = "INSERT INTO usersinfo(firstName, lastName, userName, email, password, date) VALUES (`$firstName`,`$lastName`,`$userName`,`$email`,`$password`,'$date')";
 					if(mysqli_query($con, $insertQuery))
 					{
 							$error = "You are successfully registered";
