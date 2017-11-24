@@ -59,7 +59,7 @@
 		else
 		{
 				$password = password_hash($password, PASSWORD_DEFAULT);
-				$insertQuery = "INSERT INTO usersinfo(firstName, lastName, userName, email, password, date) VALUES (`$firstName`,`$lastName`,`$userName`,`$email`,`$password`,'$date')";
+				$insertQuery = "INSERT INTO usersinfo(firstName, lastName, userName, email, password, date) VALUES ('$firstName','$lastName','$userName','$email','$password','$date')";
 					if(mysqli_query($con, $insertQuery))
 					{
 							$error = "You are successfully registered";

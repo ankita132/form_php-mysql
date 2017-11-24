@@ -7,7 +7,7 @@
 
 	if(isset($_POST['submit'])){
 		 $note = mysqli_real_escape_string($con, $_POST['note']);
-		 $insertQuery = "INSERT INTO notes(note, name) VALUES ('$note', `$name`)";
+		 $insertQuery = "INSERT INTO notes(note, name) VALUES ('$note', '$name')";
 
 		 if(mysqli_query($con, $insertQuery))
 		 {

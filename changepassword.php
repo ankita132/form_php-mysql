@@ -23,7 +23,7 @@
 			$password = password_hash($password,PASSWORD_DEFAULT);
 
 			$email = $_SESSION['email'];
-			if(mysqli_query($con, "UPDATE usersinfo SET password=`$password` WHERE email=`$email`"))
+			if(mysqli_query($con, "UPDATE usersinfo SET password='$password' WHERE email='$email'"))
 			{
 				$error = "Password changed successfully, <a href='profile.php'>click here</a> to go to the profile";
 			}
