@@ -22,7 +22,7 @@
 		{
 			$result = mysqli_query($con, "SELECT password FROM usersinfo WHERE email='$email'");
 			$retrievepassword = mysqli_fetch_assoc($result);
-
+			
 			if(!password_verify($password, $retrievepassword['password']))
 			{
 				$error = "Password is incorrect";
@@ -37,7 +37,7 @@
 				$_SESSION['email'] = $email;
 				$_SESSION['firstname'] = $row['firstname'];
 				$_SESSION['lastname'] = $row['lastname'];
-			}
+				}
 				if($checkBox == "on")
 				{
 					setcookie("email",$email, time()+3600);
