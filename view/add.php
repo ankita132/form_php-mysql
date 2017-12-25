@@ -8,7 +8,10 @@ $name = $_SESSION['username'];
 if(isset($_POST['note'])){
 
     $note = mysqli_real_escape_string($con, $_POST['note']);
-    $insertQuery = "INSERT INTO notes(note, name) VALUES ('$note', '$name')";
+ $date = mysqli_real_escape_string($con, $_POST['date']);
+    $event = mysqli_real_escape_string($con, $_POST['event']);;
+
+    $insertQuery = "INSERT INTO notes(note, name, date, event) VALUES ('$note', '$name', '$date', '$event')";
 
     if(isset($_POST['id'])){
         $id = $_POST['id'];
