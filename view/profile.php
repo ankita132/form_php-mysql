@@ -21,7 +21,13 @@ function profile_image_show(){
 <html>
 <head>
 	<title>Notes App - Home</title>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+
+
 	<link rel="stylesheet" type="text/css" href="profile.css">
 	<link rel="icon" href="icon.png" />
 
@@ -29,8 +35,16 @@ function profile_image_show(){
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function() {
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+		  <script>
+
+		  $(document).ready(function() {
+		    $("#datepicker").datepicker();
+		  });
+
+ 		$(document).ready(function() {
 			var len = 0;
 			var maxchar = 255;
 			$( "#remainingC" ).html( "Remaining characters: " +"255" );
@@ -100,15 +114,18 @@ function profile_image_show(){
 			$(document).on('click','#add-note',function(){
 				var note = $('#new-note').val();
 				var id  = $('#note-id').val();
+				var date = $('#datepicker').val();
+				var event = $('#new-event').val();
 
 				if(note!=''){
 					if(id!=''){
 						$.ajax({
 							type:'POST',
 							url : 'add.php',
-							data :{'note':note,'id':id},
+							data :{'note':note,'id':id,'date':date,'event':event},
 							success : function(data){
 								$("#show-notes").html(data);
+
 							}
 						});
 					}
@@ -116,7 +133,7 @@ function profile_image_show(){
 						$.ajax({
 							type:'POST',
 							url : 'add.php',
-							data :{'note':note},
+							data :{'note':note,'date':date,'event':event},
 							success : function(data){
 								$("#show-notes").html(data);
 							}
@@ -136,17 +153,17 @@ function profile_image_show(){
 				var form = document.querySelector('form');
 				var formdata =new FormData(form);
 				var file = event.target.files[0];
-				
+
 				if(!file.type.match('image/.*')){
 					window.alert( "Only Image formats are allowed.");
 					return;
 				}
 				if(file.size >= 2*1024*1024){
 					window.alert("Seems like you are trying to upload a very BIG file. ("+parseInt(file.size/1024/1024)+" mb)(File Limit : 2 mb)");
-					return;					
+					return;
 				}
-				
-				if (formdata) {	
+
+				if (formdata) {
 					$.ajax({
 						url: "upload.php",
 						type: "POST",
@@ -154,16 +171,18 @@ function profile_image_show(){
 						processData: false,
 						contentType: false,
 						success: function (res) {
-							document.getElementById("profile-image").innerHTML = res; 
+							document.getElementById("profile-image").innerHTML = res;
 						}
 					});
 				}
 			});
 		});
-		
+
 	</script>
 </head>
 <body>
+
+
 
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -174,11 +193,16 @@ function profile_image_show(){
 				<li><a href="#" style="font-size:15pt;"> Notes-App</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 				<li><a href="changepassword.php"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
 				<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
 			</ul>
 		</div>
 	</nav>
+
+
+
+
 	<div class="window">
 		<div class="overlay"></div>
 		<div class="box header">
@@ -187,7 +211,7 @@ function profile_image_show(){
 				<div id="profile-image">
 					<img src="<?php echo profile_image_show();
 					?>" alt="" onclick = "$('#images').click();"} />
-				</div>		
+				</div>
 			</form>
 
 			<h2><?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></h2>
@@ -197,10 +221,43 @@ function profile_image_show(){
 			<!-- <form method="POST" action="add.php"> -->
 				<div id="add-edit">
 					<div class="wrap">
-						<input id="new-note" type="text" placeholder="Enter note here.." name="note" class="add" maxlength="255" ><span id='remainingC'></span>
-						<br/><br/>
+					<input id="new-note" type="text" placeholder="Enter note here.." name="note" class="add" maxlength="255" ><span id='remainingC'></span>
+					<br/><br/><input id="datepicker" type="text" placeholder="Enter the date.." name="date" readonly="readonly" value=<?php echo date("m/d/Y");?> />
+					<br/>
+					Reminder for..
+					<select id="new-event" style="background-color: Black;color: #FFFFFF;width: 270px;" name="event">
+					  <option value="None">Just Save</option>
+					  <option value="Conferences">Conferences</option>
+				  	  <option value="Meetings">Meetings</option>
+				      <option value="Seminars">Seminars</option>
+				      <option value="Team Building Events">Team Building Events</option>
+				      <option value="Trade Shows">Trade Shows</option>
+				      <option value="Business Dinners">Business Dinners</option>
+				      <option value="Golf Events">Golf Events</option>
+				      <option value="Press Conferences">Press Conferences</option>
+				      <option value="Networking Events">Networking Events</option>
+				      <option value="Incentive Travel">Incentive Travel</option>
+				      <option value="Opening Ceremonies">Opening Ceremonies</option>
+				      <option value="Product Launches">Product Launches</option>
+				      <option value="Theme Parties">Theme Parties</option>
+				      <option value="VIP Events">VIP Events</option>
+				      <option value="Trade Fairs">Trade Fairs</option>
+				      <option value="Shareholder Meetings">Shareholder Meetings</option>
+				      <option value="Award Ceremonies">Award Ceremonies</option>
+					  <option value="Incentive Events">Incentive Events</option>
+				      <option value="Board Meetings">Board Meetings</option>
+				      <option value="Executive Retreats">Executive Retreats</option>
+				      <option value="Weddings">Weddings</option>
+					  <option value="Birthdays">Birthdays</option>
+					  <option value="Wedding Anniversaries">Wedding Anniversaries</option>
+				      <option value="Family Events">Family Events</option>
+					  <option value="Other Events">Other Events</option>
+					</select>
+
+
+						<br/>
 						<div class="bg"></div>
-					</div>
+					</div><br/><br/>
 					<input id="note-id" hidden value="">
 					<input id="add-note" type="submit"  class="btn"  name="submit" value="add-note" />
 				</div>

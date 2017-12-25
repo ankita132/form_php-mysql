@@ -6,6 +6,8 @@ body{
   background-size:cover;
 	overflow-y: hidden;
 }
+
+
 @keyframes fadeIn {
   0%{
     opacity:0;
@@ -414,3 +416,4 @@ input:focus::-webkit-input-placeholder {
 .material .tabs-content .friend-list .action .fa:hover{
   color:red;
 }
+
