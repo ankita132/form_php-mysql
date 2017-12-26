@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2017 at 08:11 AM
+-- Generation Time: Dec 26, 2017 at 09:56 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -44,9 +44,9 @@ CREATE TABLE `usersinfo` (
 
 INSERT INTO `usersinfo` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `date`) VALUES
 (4, 'ankita', 'sahoo', 'ankita132', 'ankita13@gmail.com', '$2y$10$r0ybJE1PDNJeQWpAUgemXeNsR8YVcXrxIIMhFTbypxGthcW4FQ1hG', '0000-00-00 00:00:00'),
-(8, 'Dips', 'Ghosh', 'dipu01', 'dipayan6ghosh@gmail.com', '$2y$10$QcHybM4Ipj0zUmbv1FAtkOxYSYjhPDx38N/FWhI/NgbHirgCd0jtS', '2017-12-01 07:47:12'),
+(8, 'Jeet', 'Ghosh', 'dipu01', 'dipayan6ghosh@gmail.com', '$2y$10$QcHybM4Ipj0zUmbv1FAtkOxYSYjhPDx38N/FWhI/NgbHirgCd0jtS', '2017-12-25 13:23:50'),
 (7, 'Dipayan', 'Ghosh', 'dipu02', 'd6ghosh@gmail.com', '$2y$10$4gBfufWV4k2jqrifOCWJwuGsian1F2D6oJclkaNvpKqZQ/7GbeP1K', '2017-11-24 00:00:00'),
-(9, 'Dipu', 'Ghosh', 'dipu03', 'theheedfulcoder@gmail.com', '$2y$10$5jcvlM9eUMmj9Jki.jCG7.X2ZTHlc905jdnmOPSYjFBEcJexlDIxG', '2017-12-01 07:58:47'),
+(10, 'Dipayan', 'Ghosh', 'dipu6', 'dipa6ghosh@gmail.com', '$2y$10$HIpycLiPu/KfMlaDwtK/g.hI4hywo0MYKuSHJWbsVRc/lHj/KqyFy', '2017-12-25 13:22:03'),
 (6, 'neha', 'gupta', 'neha32', 'neha32@gmail.com', '$2y$10$QuTvqpPhDgOo/fWOx/1Cce2tCx8r5G09GKPd06szIMBhOvFJZwr46', '0000-00-00 00:00:00'),
 (5, 'sourav', 'sinha', 'sourav', 'sourav@gmail.com', '$2y$10$bFGsKpi3vZOVjWmXSWILwusUzE1LMWoMRqIlQQsmeXPfwsY2FIJOO', '0000-00-00 00:00:00');
 
@@ -69,7 +69,7 @@ ALTER TABLE `usersinfo`
 -- AUTO_INCREMENT for table `usersinfo`
 --
 ALTER TABLE `usersinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
