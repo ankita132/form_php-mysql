@@ -5,9 +5,13 @@ if(!logged_in())("Location: login.php");
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
-$sql="DELETE FROM notes WHERE id='$id'";
-$result = mysqli_query($con, $sql) or die("Unable to delete database entry.");
+$sql="UPDATE notes
+SET pin = CASE WHEN id='$id' and pin = 1 Then 0
+WHEN id='$id' and pin = 0 Then 1
+ELSE pin
+END";
 
+$result = mysqli_query($con, $sql) or die("Unable to pin the note.");
 $name = $_SESSION['username'];
 $sqlresult = mysqli_query($con, "SELECT * FROM notes WHERE name='$name' and pin=1") or die ("Unable to query notes");
 
