@@ -58,6 +58,17 @@ function profile_image_show(){
 				}
 			});
 		}
+		function pinned(id){
+					$.ajax({
+						type:'GET',
+						url : 'pinned.php',
+						data :{'id':id},
+						success : function(data){
+							$("#show-notes").html(data);
+						}
+					});
+		}
+
 		function edit(id){
 			$.ajax({
 				type:'GET',
@@ -136,17 +147,17 @@ function profile_image_show(){
 				var form = document.querySelector('form');
 				var formdata =new FormData(form);
 				var file = event.target.files[0];
-				
+
 				if(!file.type.match('image/.*')){
 					window.alert( "Only Image formats are allowed.");
 					return;
 				}
 				if(file.size >= 2*1024*1024){
 					window.alert("Seems like you are trying to upload a very BIG file. ("+parseInt(file.size/1024/1024)+" mb)(File Limit : 2 mb)");
-					return;					
+					return;
 				}
-				
-				if (formdata) {	
+
+				if (formdata) {
 					$.ajax({
 						url: "upload.php",
 						type: "POST",
@@ -154,13 +165,13 @@ function profile_image_show(){
 						processData: false,
 						contentType: false,
 						success: function (res) {
-							document.getElementById("profile-image").innerHTML = res; 
+							document.getElementById("profile-image").innerHTML = res;
 						}
 					});
 				}
 			});
 		});
-		
+
 	</script>
 </head>
 <body>
@@ -187,7 +198,7 @@ function profile_image_show(){
 				<div id="profile-image">
 					<img src="<?php echo profile_image_show();
 					?>" alt="" onclick = "$('#images').click();"} />
-				</div>		
+				</div>
 			</form>
 
 			<h2><?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></h2>
@@ -197,7 +208,7 @@ function profile_image_show(){
 			<!-- <form method="POST" action="add.php"> -->
 				<div id="add-edit">
 					<div class="wrap">
-						<input id="new-note" type="text" placeholder="Enter note here.." name="note" class="add" maxlength="255" ><span id='remainingC'></span>
+						<br/><input id="new-note" type="text" placeholder="Enter note here.." name="note" class="add" maxlength="255" ><span id='remainingC'></span>
 						<br/><br/>
 						<div class="bg"></div>
 					</div>
@@ -239,18 +250,36 @@ function profile_image_show(){
 							<div id="show-notes">
 								<?php
 								$name = $_SESSION['username'];
-								$sqlresult = mysqli_query($con, "SELECT * FROM notes WHERE name='$name'");
+								$sqlresult = mysqli_query($con, "SELECT * FROM notes WHERE name='$name' and pin=1");
 
 								while($Row = mysqli_fetch_array($sqlresult)){
+									$pin=$Row['pin'];
 									$id = $Row['id'];
 									echo "<div class='list-li clearfix'>
 									<div class='info pull-left'>
 									<div class='name'>".$Row['note']."</div>
 									</div> ";
 									echo '<div class="action pull-right"><a id="edit_note"  onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
+									echo '<a id="pinned_note" onclick="pinned(\''.$Row['id'].'\')"><i class="fa fa-star"></i></a>';
 									echo '<a id="remove_note" onclick="remove(\''.$Row['id'].'\')"><i class="fa fa-trash-o"></i></a></div></div>';
 
+
 								}
+								$sqlresult = mysqli_query($con, "SELECT * FROM notes WHERE name='$name' and pin=0");
+
+								while($Row = mysqli_fetch_array($sqlresult)){
+									$pin=$Row['pin'];
+									$id = $Row['id'];
+									echo "<div class='list-li clearfix'>
+									<div class='info pull-left'>
+									<div class='name'>".$Row['note']."</div>
+									</div> ";
+									echo '<div class="action pull-right"><a id="edit_note"  onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
+									echo '<a id="pinned_note" onclick="pinned(\''.$Row['id'].'\')"><i class="fa fa-star-o"></i></a>';
+									echo '<a id="remove_note" onclick="remove(\''.$Row['id'].'\')"><i class="fa fa-trash-o"></i></a></div></div>';
+
+
+																}
 								?>
 							</div>
 						</div>
