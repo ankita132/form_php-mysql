@@ -258,7 +258,8 @@ function profile_image_show(){
 									echo "<div class='list-li clearfix'>
 									<div class='info pull-left'>
 									<div class='name'>".$Row['note']."</div>
-									</div> ";
+									</div> <br>|| Last Moditfied on: ";
+									echo $Row['modtime'];
 									echo '<div class="action pull-right"><a id="edit_note"  onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
 									echo '<a id="pinned_note" onclick="pinned(\''.$Row['id'].'\')"><i class="fa fa-star"></i></a>';
 									echo '<a id="remove_note" onclick="remove(\''.$Row['id'].'\')"><i class="fa fa-trash-o"></i></a></div></div>';
@@ -273,7 +274,8 @@ function profile_image_show(){
 									echo "<div class='list-li clearfix'>
 									<div class='info pull-left'>
 									<div class='name'>".$Row['note']."</div>
-									</div> ";
+									</div> <br>|| Last Moditfied on: ";
+									echo $Row['modtime'];
 									echo '<div class="action pull-right"><a id="edit_note"  onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
 									echo '<a id="pinned_note" onclick="pinned(\''.$Row['id'].'\')"><i class="fa fa-star-o"></i></a>';
 									echo '<a id="remove_note" onclick="remove(\''.$Row['id'].'\')"><i class="fa fa-trash-o"></i></a></div></div>';

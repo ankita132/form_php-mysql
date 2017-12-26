@@ -7,12 +7,14 @@ $name = $_SESSION['username'];
 
 if(isset($_POST['note'])){
 
+	$modtime = date('Y-m-d G:i:s');
     $note = mysqli_real_escape_string($con, $_POST['note']);
-    $insertQuery = "INSERT INTO notes(note, name) VALUES ('$note', '$name')";
+
+    $insertQuery = "INSERT INTO notes(note, name, modtime) VALUES ('$note', '$name', '$modtime')";
 
     if(isset($_POST['id'])){
         $id = $_POST['id'];
-        $insertQuery = "UPDATE notes SET note ='$note' WHERE id = '$id'";
+        $insertQuery = "UPDATE notes SET note ='$note', modtime ='$modtime' WHERE id = '$id'";
     }
     if(mysqli_query($con, $insertQuery))
     {
@@ -31,7 +33,8 @@ while($Row = mysqli_fetch_array($sqlresult)){
 									echo "<div class='list-li clearfix'>
 									<div class='info pull-left'>
 									<div class='name'>".$Row['note']."</div>
-									</div> ";
+									</div> <br>|| Last Moditfied on: ";
+									echo $Row['modtime'];
 									echo '<div class="action pull-right"><a id="edit_note"  onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
 									echo '<a id="pinned_note" onclick="pinned(\''.$Row['id'].'\')"><i class="fa fa-star"></i></a>';
 									echo '<a id="remove_note" onclick="remove(\''.$Row['id'].'\')"><i class="fa fa-trash-o"></i></a></div></div>';
@@ -47,7 +50,8 @@ while($Row = mysqli_fetch_array($sqlresult)){
 									echo "<div class='list-li clearfix'>
 									<div class='info pull-left'>
 									<div class='name'>".$Row['note']."</div>
-									</div> ";
+									</div> <br>|| Last Moditfied on: ";
+									echo $Row['modtime'];
 									echo '<div class="action pull-right"><a id="edit_note"  onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
 									echo '<a id="pinned_note" onclick="pinned(\''.$Row['id'].'\')"><i class="fa fa-star-o"></i></a>';
 									echo '<a id="remove_note" onclick="remove(\''.$Row['id'].'\')"><i class="fa fa-trash-o"></i></a></div></div>';

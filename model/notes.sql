@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2017 at 09:55 AM
+-- Generation Time: Dec 26, 2017 at 05:46 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -32,19 +32,19 @@ CREATE TABLE `notes` (
   `id` int(11) NOT NULL,
   `note` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `pin` int(1) DEFAULT '0'
+  `pin` int(1) DEFAULT '0',
+  `modtime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `notes`
 --
 
-INSERT INTO `notes` (`id`, `note`, `name`, `pin`) VALUES
-(111, 'My first note!', 'dipu6', 1),
-(115, 'My second note', 'dipu6', 0),
-(116, 'MY third note', 'dipu6', 1),
-(117, 'My fourth note !!', 'dipu6', 0),
-(119, 'My fifth note', 'dipu6', 1);
+INSERT INTO `notes` (`id`, `note`, `name`, `pin`, `modtime`) VALUES
+(111, 'My first note!.......', 'dipu6', 1, '2017-12-26 17:44:12'),
+(115, 'My second note....', 'dipu6', 1, '2017-12-26 17:27:25'),
+(116, 'MY third note..', 'dipu6', 1, '2017-12-26 17:21:13'),
+(120, 'another note....', 'dipu6', 0, '2017-12-26 17:44:23');
 
 --
 -- Indexes for dumped tables
@@ -64,7 +64,7 @@ ALTER TABLE `notes`
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

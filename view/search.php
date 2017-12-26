@@ -21,7 +21,8 @@ while($Row = mysqli_fetch_array($sqlresult)){
 	echo "<div class='list-li clearfix'>
           <div class='info pull-left'>
             <div class='name'>".$Row['note']."</div>
-          </div> ";
+          </div> <br>|| Last Moditfied on: ";
+									echo $Row['modtime'];
           echo '<div class="action pull-right">
             <a id="edit_note" onclick="edit(\''.$Row['id'].'\')"><i class="fa fa-edit"></i></a>';
             if($pin==1)
